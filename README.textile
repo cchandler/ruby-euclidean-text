@@ -1,5 +1,6 @@
 h1. Example Euclidean histogram
 
+<code>
 histo1 = TextTools.read_to_histogram('aol1.txt')
 histo2 = TextTools.read_to_histogram('aol2.txt')
 histo3 = TextTools.read_to_histogram('other1.txt')
@@ -62,3 +63,4 @@ puts "\nUnrelated Histograms"
 rejected.each do |x|
   puts "#{x[0] + 1} #{x[1] + 1} Distance #{x[2]}"
 end
+</code>
