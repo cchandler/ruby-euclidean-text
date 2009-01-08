@@ -1,0 +1,64 @@
+h1. Example Euclidean histogram
+
+histo1 = TextTools.read_to_histogram('aol1.txt')
+histo2 = TextTools.read_to_histogram('aol2.txt')
+histo3 = TextTools.read_to_histogram('other1.txt')
+histo4 = TextTools.read_to_histogram('aol3.txt')
+histo5 = TextTools.read_to_histogram('cell1.txt')
+histo6 = TextTools.read_to_histogram('aol4.txt')
+histo7 = TextTools.read_to_histogram('aol5.txt')
+histo8 = TextTools.read_to_histogram('ritchie1.txt')
+histo9 = TextTools.read_to_histogram('ritchie2.txt')
+
+#Pretend that we're working with a graph
+
+#Vertex set
+vertex = []
+vertex << histo1
+vertex << histo2
+vertex << histo3
+vertex << histo4
+vertex << histo5
+vertex << histo6
+vertex << histo7
+vertex << histo8
+vertex << histo9
+
+edges=[]
+rejected=[]
+
+vertex.each_index do |x|
+  i = 1
+  until vertex[x+i].nil?
+    distance = TextTools.histogram_distance(vertex[x], vertex[x+i])
+    if distance < 400.0
+      edges << [x,x+i, distance]
+      # puts "***"
+      # puts "Same topic!"
+      # puts x+1
+      # puts x + i+1
+      # puts distance
+      # puts "***"
+    else
+      rejected << [x,x+i, distance]
+      # puts "**"
+      # puts "Too far!"
+      # puts x+1
+      # puts x + i+1
+      # puts distance
+      # puts "**"
+    end
+    i += 1
+  end
+    
+end
+
+puts "Related Histograms"
+edges.each do |x|
+  puts "#{x[0] + 1} #{x[1] + 1} Distance #{x[2]}"
+end
+
+puts "\nUnrelated Histograms"
+rejected.each do |x|
+  puts "#{x[0] + 1} #{x[1] + 1} Distance #{x[2]}"
+end
